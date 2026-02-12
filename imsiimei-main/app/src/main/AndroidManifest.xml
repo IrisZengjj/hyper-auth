@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.imsi.imei">
+
+    <!-- 添加存储权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- 系统权限，需要移除或仅在系统应用中使用 -->
+    <!--
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
+
+    <uses-permission android:name="android.permission.MASTER_CLEAR"/>
+    <uses-permission android:name="android.permission.RESET_PERMISSIONS"/>
+    -->
+
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:name="androidx.multidex.MultiDexApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+        android:theme="@style/AppTheme">
+        <uses-library android:name="org.apache.http.legacy"
+            android:required="false"/>
+        <!--usesCleartextTraffic-->
+
+        <!-- 主活动 -->
+        <activity
+            android:name=".activities.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 硬件信息活动 -->
+        <activity android:name=".activities.HardwareInfoActivity"
+            android:exported="false"
+            android:label="@string/app_name"/>
+
+        <!-- 软件信息活动 -->
+        <activity android:name=".activities.SoftwareInfoActivity"
+            android:exported="false"
+            android:label="@string/app_name"/>
+
+        <!-- SIM卡信息活动 -->
+        <activity android:name=".activities.SimInfoActivity"
+            android:exported="false"
+            android:label="@string/app_name"/>
+
+        <!-- 认证结果活动 -->
+        <activity android:name=".activities.AuthResultActivity"
+            android:exported="false"
+            android:label="@string/app_name"/>
+
+        <!-- Keycloak认证活动 -->
+        <activity android:name=".activities.KeycloakAuthActivity"
+            android:exported="false"
+            android:label="@string/app_name"/>
+
+        <!-- 注册活动 -->
+        <activity android:name=".activities.RegisterActivity"
+            android:exported="false"
+            android:label="@string/app_name"/>
+
+        <!-- <receiver android:name=".utils.DataCollectionReceiver" android:exported="false" /> -->
+
+    </application>
+
+</manifest>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.6.4</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+  <groupId>com.keycloak.credentialserver</groupId>
+  <artifactId>credential-server</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>credential-server</name>
+  <description>Core server for multi-modal credential generation and storage</description>
+
+  <properties>
+    <java.version>17</java.version>
+    <!-- 统一管理MyBatis-Plus版本（与Spring Boot 2.6.4兼容） -->
+    <mybatis-plus.version>3.5.1</mybatis-plus.version>
+  </properties>
+
+  <dependencies>
+    <!-- 1. 核心依赖：Spring Web（HTTP接口能力） -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- 2. 数据库相关依赖 -->
+    <!-- 移除spring-boot-starter-data-jpa（你用MyBatis-Plus，无需JPA） -->
+    <!-- 保留MySQL驱动（适配Java 17 + Spring Boot 2.6.4） -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.28</version>
+    </dependency>
+    <!-- 新增：MyBatis-Plus Starter（解决baomidou相关类找不到） -->
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-boot-starter</artifactId>
+      <version>${mybatis-plus.version}</version>
+    </dependency>
+
+    <!-- 3. 工具依赖 -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <!-- 保留json依赖（如需处理JSON数据） -->
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20210307</version>
+    </dependency>
+
+    <!-- 4. 测试依赖 -->
+    <!-- 移除重复的JUnit 5依赖（Spring Boot Test已包含） -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+      <!-- 排除JUnit 4，统一用JUnit 5 -->
+      <exclusions>
+        <exclusion>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    
+
+     <!-- 用于调用 Keycloak Admin REST API（WebClient） -->
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-webflux</artifactId>
+</dependency>
+
+
+
+    <!-- 加解密依赖 -->
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk15on</artifactId>
+      <version>1.70</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Spring Boot打包插件 -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+            </exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <!-- Java编译插件（适配Java 17） -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.10.1</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <encoding>UTF-8</encoding> <!-- 新增：避免中文乱码 -->
+        </configuration>
+      </plugin>
+    </plugins>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+      <!-- 新增：确保MyBatis XML映射文件被打包（关键） -->
+      <resource>
+        <directory>src/main/resources/mapper</directory>
+        <targetPath>mapper</targetPath>
+        <includes>
+          <include>*.xml</include>
+        </includes>
+      </resource>
+    </resources>
+  </build>
+</project>
+

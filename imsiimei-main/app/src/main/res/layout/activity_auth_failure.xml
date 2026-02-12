@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@android:drawable/ic_dialog_alert"
+        android:layout_marginBottom="20dp"
+        android:contentDescription="Failure Icon" />
+
+    <TextView
+        android:id="@+id/tv_auth_result_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="认证失败！"
+        android:textSize="20sp"
+        android:textColor="@android:color/holo_red_dark"
+        android:layout_marginBottom="30dp"
+        android:gravity="center" />
+
+    <Button
+        android:id="@+id/btn_lock_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="锁屏"
+        android:background="@drawable/button_primary"
+        android:textColor="@android:color/white"
+        android:padding="12dp"
+        android:layout_marginBottom="10dp" />
+
+</LinearLayout>

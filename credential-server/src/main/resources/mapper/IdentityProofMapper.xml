@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keycloak.credentialserver.mapper.IdentityProofMapper">
+
+    <!-- 关键修改：添加 COLLATE utf8mb4_unicode_ci + BINARY 强制精准匹配 -->
+    <select id="selectByFinalCredentialHash" resultType="com.keycloak.credentialserver.entity.IdentityProof">
+        select 
+            id, 
+            phone_number_hash, 
+            device_fingerprint_hash, 
+            final_credential_hash, 
+            creation_timestamp, 
+            last_update_timestamp
+        from identity_proof
+        where BINARY final_credential_hash COLLATE utf8mb4_unicode_ci = BINARY #{finalCredentialHash} COLLATE utf8mb4_unicode_ci
+    </select>
+
+</mapper>
+

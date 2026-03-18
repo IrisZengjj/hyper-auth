@@ -1,0 +1,37 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.kotlin_version = '1.7.10'
+
+    repositories {
+        // jcenter()
+        google()
+        mavenCentral() // 使用 Maven Central 仓库
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.0.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"  // 使用更新的Kotlin插件
+
+    }
+}
+
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral() // 使用 Maven Central 仓库
+        // jcenter()
+    }
+    // buildDir = 'D:/GradleCache/${project.name}'
+    buildDir = "$rootDir/GradleCache/${project.name}"
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+task printJavaVersion {
+    doLast {
+        println "Java version: ${System.getProperty('java.version')}"
+    }
+}

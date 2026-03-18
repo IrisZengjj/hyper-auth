@@ -1,0 +1,33 @@
+# IDE 配置
+.idea/
+.vscode/
+*.iml
+
+# 编译输出
+**/target/
+**/build/
+**/out/
+*.class
+*.jar
+*.war
+*.aab
+*.apk
+*.log
+credential-server/startup.log
+
+# 密钥和敏感文件
+*.keystore
+*.pem
+*.pepk
+*.jks
+private_key*
+
+# 系统生成
+bash.exe.stackdump
+
+# 忽略整个 Keycloak 发行版
+keycloak-999.0.0-SNAPSHOT/
+
+# 如果你不希望提交其他项目中的某些目录，也可以单独指定
+imsiimei-main/app/release/
+imsiimei-main/app/*.aab

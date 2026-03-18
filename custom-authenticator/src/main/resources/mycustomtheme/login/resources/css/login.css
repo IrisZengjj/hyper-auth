@@ -1,0 +1,176 @@
+/* ======================================================= */
+/* 核心布局修复：强制垂直堆叠 (解决“三个框”问题) */
+/* ======================================================= */
+
+/* 覆盖 Keycloak/PatternFly 的默认背景和 body 样式 */
+.login-pf body, body {
+    /* 核心修复：强制 block，防止父级布局将内容横向排列 */
+    display: block !important; 
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    min-height: 100vh !important;
+    height: 100% !important; 
+}
+
+/* 强制 Keycloak 容器居中并占据全屏空间 */
+#kc-container {
+    /* 使用 Flex 布局居中，但确保内容元素是垂直的 */
+    display: flex !important;
+    flex-direction: column !important; /* 强制垂直排列，这是解决问题的关键 */
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    height: 100% !important;
+}
+
+/* 确保内容包装器是单列布局 */
+/* 避免 Keycloak 的 #kc-content 或 #kc-container-wrapper 使用 Flex/Grid 导致并排 */
+#kc-content, #kc-container-wrapper, #kc-info {
+    display: block !important; /* 强制块级显示，独占一行 */
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* 样式容器：居中的卡片 */
+.container {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 480px; 
+    padding: 40px;
+    animation: slideUp 0.5s ease-out;
+    margin: 20px auto !important; /* 增加垂直边距，确保居中，防止贴边 */
+}
+
+/* 针对注册页面的容器宽度覆盖 */
+.register-container {
+    max-width: 520px !important;
+}
+
+/* ======================================================= */
+/* 基础样式 (保持不变) */
+/* ======================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.title-text {
+    text-align: center; 
+    margin-bottom: 30px; 
+    color: #1f2937;
+}
+
+.form-group { margin-bottom: 24px; }
+label { display: block; margin-bottom: 8px; font-weight: 500; color: #374151; font-size: 14px; }
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s;
+    background: #f9fafb;
+    box-sizing: border-box;
+}
+input:focus { outline: none; border-color: #4f46e5; background: white; }
+
+.btn, .btn-primary {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.3s;
+}
+.btn:hover, .btn-primary:hover { 
+    background: linear-gradient(135deg, #4338ca, #6d28d9); 
+    color: white; 
+}
+
+.error-message, .alert-error { 
+    background: #fee2e2; 
+    color: #dc2626; 
+    padding: 12px; 
+    border-radius: 8px; 
+    margin-bottom: 24px; 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    border: none;
+}
+
+.link-text { 
+    text-align: center; 
+    margin-top: 15px; 
+    font-size: 14px; 
+}
+.link-text a { 
+    color: #4f46e5; 
+    text-decoration: none; 
+}
+.link-text a:hover { 
+    text-decoration: underline; 
+}
+
+/* 设备验证页专有样式 */
+.loader { 
+    border: 5px solid #f3f3f3; 
+    border-top: 5px solid #4f46e5; 
+    border-radius: 50%; 
+    width: 50px; 
+    height: 50px; 
+    animation: spin 1s linear infinite; 
+    margin: 0 auto 20px; 
+}
+@keyframes spin { 
+    0% { transform: rotate(0deg); } 
+    100% { transform: rotate(360deg); } 
+}
+
+.fallback-btn {
+    background: none !important; 
+    border: none !important; 
+    color: #4f46e5 !important; 
+    cursor: pointer !important; 
+    text-decoration: underline !important; 
+    font-size: 14px !important;
+    padding: 5px !important; 
+    display: inline-block !important; 
+    width: auto !important;
+}
+
+.debug-area {
+    margin-top: 30px; 
+    padding-top: 20px; 
+    border-top: 1px dashed #ccc;
+}
+.debug-hint {
+    font-size: 12px; 
+    color: #999; 
+    margin-bottom: 10px;
+}
+.debug-btn {
+    width: auto !important; 
+    padding: 10px 20px !important; 
+    font-size: 14px !important; 
+    margin: 0 auto !important;
+}

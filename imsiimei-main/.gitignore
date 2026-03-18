@@ -1,0 +1,27 @@
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+GradleCache/
+/credential-server/target/
+.externalNativeBuild
+# Maven
+target/
+*.jar
+# IDE
+.idea/
+# OS
+Thumbs.db
+.idea
+local.properties
+/.idea/dictionaries
+/.idea
+/.idea/misc.xml
+/.gradle
+GradleCache
+
+/.idea/

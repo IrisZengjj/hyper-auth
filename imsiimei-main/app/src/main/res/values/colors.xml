@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Material Theme Colors-->
+    <color name="colorPrimary">#234787</color>
+    <color name="colorPrimaryDark">#496FB0</color>
+    <color name="colorAccent">#234787</color>
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#727272</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <!--Material Theme Colors-->
+</resources>

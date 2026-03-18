@@ -58,4 +58,15 @@ mvn clean package
 jar包存放于keycloak发行版的providers路径下作为自定义认证流，并且登录myrealm后台进行认证流程配置。  
 
 ### 四、相关配置 
-- mycustomtheme内含login和admin主题，放在keycloak发行版的themes路径下，并且登录myrealm后台进行主题配置。  
+- mycustomtheme内含login和admin主题，放在keycloak发行版的themes路径下，并且登录myrealm后台进行主题配置。
+- keycloak后台配置：
+  （1）客户端：credential-server-admin设置为管理员账户角色`realm-management`   
+  <img width="2087" height="676" alt="image" src="https://github.com/user-attachments/assets/db20e9cb-a3a4-48a1-bf6b-dd2f34755055" />  
+  （2）用户管理：testuser设置为管理员角色`realm-management`   
+  <img width="2095" height="661" alt="image" src="https://github.com/user-attachments/assets/92e4b676-dbf6-47a1-b474-b71a87e53184" />
+  （3）领域设置：登录页面主题和管理界面主题自定义   
+  <img width="2102" height="879" alt="image" src="https://github.com/user-attachments/assets/6b972139-9c69-47b6-9d92-04bd95c6c606" />
+  （4）
+
+
+

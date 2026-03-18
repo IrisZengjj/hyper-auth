@@ -44,11 +44,12 @@ adb shell settings put global hidden_api_policy 1
 
 ### 三、认证器 (custom-authenticator)  
 （1）keycloak打包：  
-使用maven编译基于quarkus的keycloak源码（https://github.com/keycloak/keycloak），生成可直接运行的发行版keycloak-999.0.0-SNAPSHOT。可直接通过keycloak-999.0.0-SNAPSHOT\bin目录运行命令：  
+使用maven编译基于quarkus的keycloak源码，生成可直接运行的发行版keycloak-999.0.0-SNAPSHOT。（https://github.com/keycloak/keycloak）  
+可直接通过keycloak-999.0.0-SNAPSHOT\bin目录运行命令以开启认证器：  
 ```bash
 kc.bat start-dev --hostname=localhost --http-host=0.0.0.0
 ```
-以开启认证器，访问http://localhost:8080/admin登录后台管理页面（用户名：admin，密码：admin）。   
+访问http://localhost:8080/admin登录后台管理页面（用户名：admin，密码：admin）。   
 （2）custom-authenticator根目录打包：  
 ```bash
 mvn clean compile

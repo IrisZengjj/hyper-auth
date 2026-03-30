@@ -25,10 +25,12 @@ class DataTransmitter {
         private const val PREFS_NAME = "server_config"
         private const val SERVER_URL_KEY = "server_url"
         // 实际的服务器IP地址
-        private const val DEFAULT_SERVER_URL = ServerConfig.API_URL
+        private val DEFAULT_SERVER_URL: String
+            get() = ServerConfig.API_URL
        // 从共享偏好设置获取服务器URL
         private fun getServerUrl(context: Context? = null): String {
             return if(context != null) {
+                ServerConfig.init(context)
                 val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
                 prefs.getString(SERVER_URL_KEY, DEFAULT_SERVER_URL) ?: DEFAULT_SERVER_URL
             } else {

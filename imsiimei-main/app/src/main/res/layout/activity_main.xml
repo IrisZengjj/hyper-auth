@@ -8,6 +8,36 @@
     android:background="@android:color/white"
     tools:context="com.imsi.imei.activities.MainActivity">
 
+    <!-- IP地址配置 -->
+    <LinearLayout
+        android:id="@+id/ll_ip_config"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/et_ip_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="请输入服务器IP地址"
+            android:inputType="text"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_save_ip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="保存IP" />
+    </LinearLayout>
+
     <!-- 手机号码 -->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvPhoneNumber"
@@ -25,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/ll_ip_config" />
 
     <!-- 采集状态显示 -->
     <TextView

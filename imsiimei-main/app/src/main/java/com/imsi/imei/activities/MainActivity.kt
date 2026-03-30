@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.imsi.imei.R
@@ -17,6 +18,8 @@ import java.io.File
 class MainActivity : Activity(), View.OnClickListener {
 
     // UI 元素
+    private var etIpAddress: EditText? = null
+    private var btnSaveIp: Button? = null
     private var btnHardwareInfo: Button? = null
     private var btnSoftwareInfo: Button? = null
     private var btnSimInfo: Button? = null
@@ -36,6 +39,9 @@ class MainActivity : Activity(), View.OnClickListener {
         // 初始化UI元素
         initViews()
 
+        // 加载保存的IP地址
+        loadSavedIpAddress()
+
         // 启动周期性数据采集
         startPeriodicCollection()
 
@@ -51,6 +57,9 @@ class MainActivity : Activity(), View.OnClickListener {
 
     override fun onClick(v: View) {
         when (v.id) {
+            R.id.btn_save_ip -> {
+                saveIpAddress()
+            }
             R.id.btn_hardware_info -> {
                 // 跳转到设备属性页面
                 val intent = Intent(this, HardwareInfoActivity::class.java)
@@ -83,6 +92,8 @@ class MainActivity : Activity(), View.OnClickListener {
      * 初始化UI元素
      */
     private fun initViews() {
+        etIpAddress = findViewById(R.id.et_ip_address)
+        btnSaveIp = findViewById(R.id.btn_save_ip)
         btnHardwareInfo = findViewById(R.id.btn_hardware_info)
         btnSoftwareInfo = findViewById(R.id.btn_software_info)
         btnSimInfo = findViewById(R.id.btn_sim_info)
@@ -92,11 +103,39 @@ class MainActivity : Activity(), View.OnClickListener {
         tvCollectionStatus = findViewById(R.id.tv_collection_status)
 
         // 设置点击事件监听器
+        btnSaveIp?.setOnClickListener(this)
         btnHardwareInfo?.setOnClickListener(this)
         btnSoftwareInfo?.setOnClickListener(this)
         btnSimInfo?.setOnClickListener(this)
         btnManualCollect?.setOnClickListener(this)
         btnAuthCollect?.setOnClickListener(this)
+    }
+
+    /**
+     * 加载保存的IP地址
+     */
+    private fun loadSavedIpAddress() {
+        val prefs = getSharedPreferences("AppConfig", MODE_PRIVATE)
+        val savedIp = prefs.getString("server_ip", "") ?: ""
+        ServerConfig.IP_ADDRESS = savedIp
+        etIpAddress?.setText(savedIp)
+    }
+
+    /**
+     * 保存IP地址
+     */
+    private fun saveIpAddress() {
+        val ip = etIpAddress?.text?.toString()?.trim() ?: ""
+        if (ip.isEmpty()) {
+            Toast.makeText(this, "请输入IP地址", Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        val prefs = getSharedPreferences("AppConfig", MODE_PRIVATE)
+        prefs.edit().putString("server_ip", ip).apply()
+        
+        ServerConfig.IP_ADDRESS = ip
+        Toast.makeText(this, "IP地址已保存", Toast.LENGTH_SHORT).show()
     }
 
     /**

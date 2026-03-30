@@ -33,6 +33,9 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        ServerConfig.init(this)
+
+        // 初始化UI元素
         btnRegister = findViewById(R.id.btn_register)
         etUsername = findViewById(R.id.et_username)
         etPassword = findViewById(R.id.et_password)
@@ -151,8 +154,13 @@ class RegisterActivity : AppCompatActivity() {
                 val response = client.newCall(request).execute()
                 if (response.isSuccessful) {
                     val responseData = response.body?.string()
-                    val jsonObject = JSONObject(responseData)
-                    jsonObject.getString("access_token")
+                    if (responseData != null) {
+                        val jsonObject = JSONObject(responseData)
+                        if (jsonObject.has("access_token")) {
+                            return@withContext jsonObject.getString("access_token")
+                        }
+                    }
+                    null
                 } else {
                     Log.e("AuthError", "Failed to get token: ${response.code} ${response.message}")
                     val responseBody = response.body?.string()

@@ -38,7 +38,7 @@ public class MyCustomAuthenticatorFactory implements AuthenticatorFactory {
     }
 
     public String getDisplayType() {
-        return "自定义设备凭证认证器";
+        return "设备凭证认证器";
     }
 
     public String getHelpText() {
@@ -62,7 +62,7 @@ public class MyCustomAuthenticatorFactory implements AuthenticatorFactory {
     }
 
     public void init(Config.Scope config) {
-        logger.info("自定义设备凭证认证器初始化成功！ID：" + AUTHENTICATOR_ID);
+        logger.info("设备凭证认证器初始化成功！ID：" + AUTHENTICATOR_ID);
     }
 
     public void postInit(KeycloakSessionFactory factory) {}

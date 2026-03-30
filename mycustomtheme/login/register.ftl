@@ -2,6 +2,7 @@
 <@layout.registrationLayout displayMessage=true; section>
 
     <div class="container register-container">
+	<h1 class="brand-title">HyperAuth</h1>
         <h2 class="title-text">注册新用户</h2>
 
         <#if message?has_content && message.type != 'success'>

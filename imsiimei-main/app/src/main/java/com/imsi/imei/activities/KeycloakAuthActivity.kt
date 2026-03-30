@@ -24,6 +24,9 @@ class KeycloakAuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_keycloak_auth)
 
+        ServerConfig.init(this)
+
+        // 初始化UI元素
         etUsername = findViewById(R.id.et_username)
         etPassword = findViewById(R.id.et_password)
         btnAuthenticate = findViewById(R.id.btn_authenticate)
@@ -75,7 +78,7 @@ class KeycloakAuthActivity : AppCompatActivity() {
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
                     btnAuthenticate.isEnabled = true
-                    Toast.makeText(this@KeycloakAuthActivity, "Keycloak认证请求失败: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@KeycloakAuthActivity, "设备认证请求失败: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -87,15 +90,15 @@ class KeycloakAuthActivity : AppCompatActivity() {
                         if (responseBody != null) {
                             val json = JSONObject(responseBody)
                             if (json.has("access_token")) {
-                                Toast.makeText(this@KeycloakAuthActivity, "keycloak认证成功", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@KeycloakAuthActivity, "设备认证成功", Toast.LENGTH_SHORT).show()
                             } else {
-                                Toast.makeText(this@KeycloakAuthActivity, "Keycloak认证失败: 未返回access_token", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@KeycloakAuthActivity, "设备认证失败: 未返回access_token", Toast.LENGTH_SHORT).show()
                             }
                         } else {
-                            Toast.makeText(this@KeycloakAuthActivity, "Keycloak认证失败: 响应体为空", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@KeycloakAuthActivity, "设备认证失败: 响应体为空", Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Toast.makeText(this@KeycloakAuthActivity, "Keycloak认证失败: ${response.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@KeycloakAuthActivity, "设备认证失败: ${response.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
